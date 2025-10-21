@@ -13,6 +13,7 @@ dependencies:
   register_interface:   { git: "https://github.com/pulp-platform/register_interface.git",   version: 0.4.3   }
   reqrsp_interface:     { path: "hardware/deps/reqrsp_interface"                                             }
   snitch:               { path: "hardware/deps/snitch"                                                       }
+  spatz:                { git: "https://github.com/pulp-platform/spatz.git",                rev: bfa27da     }
   cluster_icache:       { git: "https://github.com/pulp-platform/cluster_icache.git",       version: 0.1.1   }
   tech_cells_generic:   { git: "https://github.com/pulp-platform/tech_cells_generic.git",   version: 0.2.13  }
   fpnew:                { git: "https://github.com/pulp-platform/cvfpu.git",                rev: pulp-v0.1.3 }
@@ -27,8 +28,10 @@ export_include_dirs:
 
 sources:
   # Level 0
+  - hardware/src/latch_scm.sv
   - hardware/src/mempool_pkg.sv
   - hardware/src/axi_hier_interco.sv
+  - hardware/src/tcdm_id_remapper.sv
   - hardware/src/mempool_cc.sv
   - hardware/src/snitch_addr_demux.sv
   - hardware/src/tcdm_adapter.sv
@@ -69,10 +72,10 @@ sources:
       - hardware/tb/traffic_generator.sv
       # Level 2
       - hardware/tb/mempool_tb.sv
-      # DRAMsys
-      - hardware/deps/dram_rtl_sim/src/sim_dram.sv
-      - hardware/deps/dram_rtl_sim/src/axi_dram_sim.sv
-      - hardware/deps/dram_rtl_sim/src/dram_sim_engine.sv
+      # # DRAMsys
+      # - hardware/deps/dram_rtl_sim/src/sim_dram.sv
+      # - hardware/deps/dram_rtl_sim/src/axi_dram_sim.sv
+      # - hardware/deps/dram_rtl_sim/src/dram_sim_engine.sv
 
   - target: mempool_verilator
     files:
